@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/leonardlin/statistics.js.git"
+    "url": "git://github.com/thisancog/statistics.js.git"
   },
   "directories": {
     "doc": "docs",

@@ -1731,11 +1731,11 @@ Statistics.prototype.spearmansRho = function(firstColumn, secondColumn, adjustFo
 
 
 /********* Kendall's Tau *********
- * 20.05.2025: LL, fixing tau-b with taus. It agrees now with reference libs:
+ * 20.05.2025: LL, fixing tau-b with multiple ties. It agrees now with other libs:
  * 	https://www.wessa.net/rwasp_kendall.wasp
  * 	scipy
  * 
- * 	The p-twosided calculation is based on wikipedia, however both reference libs calculate different p-numbers.
+ * 	The p-twosided calculation is based on wikipedia, however both libs (https://www.wessa.net/rwasp_kendall.wasp, scipy) calculate different p-numbers.
  */
 
 Statistics.prototype.kendallsTau = function(firstColumn, secondColumn) {
