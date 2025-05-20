@@ -240,11 +240,24 @@ describe(".kendallsTau()", () => {
 		],
 		example2Vars = { grade: 'ordinal', iq: 'metric' };
 
+		// calculated based on scipy: tau-b -0.501745206004254
+		let example3Values = [
+			{ x: 12, y: 1 },
+			{ x: 2, y: 4 },
+			{ x: 1, y: 7 },
+			{ x: 12, y: 1 },
+			{ x: 2, y: 0 },
+			{ x: 12, y: 0}
+		],
+		example3Vars = { x: 'metric', y: 'metric' };
+
 
 	let stats1 = new Statistics(example1Values, example1Vars, options),
 		stats2 = new Statistics(example2Values, example2Vars, options),
+		stats3 = new Statistics(example3Values, example3Vars, options),
 		result1 = stats1.kendallsTau('interviewer1', 'interviewer2'),
-		result2 = stats2.kendallsTau('grade', 'iq');
+		result2 = stats2.kendallsTau('grade', 'iq'),
+		result3 = stats3.kendallsTau('x', 'y');
 
 	it("should compute the correct value for several examples", () => {
 		assert.equal(Math.abs(result1.a.tauA - 0.848484848) < threshhold, true);
@@ -260,6 +273,8 @@ describe(".kendallsTau()", () => {
 		assert.equal(Math.abs(result2.b.z - 0.489897949) < threshhold, true);
 		assert.equal(Math.abs(result2.a.pOneTailed - 0.31210) < threshhold, true);
 		assert.equal(Math.abs(result2.b.pOneTailed - 0.31210) < threshhold, true);
+
+		assert.equal(Math.abs(result3.b.tauB + 0.501745206004254) < threshhold, true);
 	});
 
 	it("should return undefined if only one or no columns are at least ordinal", () => {

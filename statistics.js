@@ -1730,7 +1730,13 @@ Statistics.prototype.spearmansRho = function(firstColumn, secondColumn, adjustFo
 }
 
 
-/********* Kendall's Tau *********/
+/********* Kendall's Tau *********
+ * 20.05.2025: LL, fixing tau-b with taus. It agrees now with reference libs:
+ * 	https://www.wessa.net/rwasp_kendall.wasp
+ * 	scipy
+ * 
+ * 	The p-twosided calculation is based on wikipedia, however both reference libs calculate different p-numbers.
+ */
 
 Statistics.prototype.kendallsTau = function(firstColumn, secondColumn) {
 	if (typeof secondColumn === 'undefined') return this.errorMessage('Kendall\'s Tau requires two columns to analyze.');
@@ -1784,7 +1790,15 @@ Statistics.prototype.kendallsTau = function(firstColumn, secondColumn) {
 
 	// tau b and its statistics are identical to tau a if no ties are present
 	if (typeof tauA === 'undefined') {
-		tauB = diff / Math.sqrt((concordants + discordants + Object.keys(tiesFirst).length) * (concordants + discordants + Object.keys(tiesSecond).length));
+
+		let numberOfTiesFirst = Object.values(tiesFirst).reduce((s, t, idx) => {
+			return s + t;
+		}, 0);
+		let numberOfTiesSecond = Object.values(tiesSecond).reduce((s, t, idx) => {
+			return s + t;
+		}, 0);
+
+		tauB = diff / Math.sqrt((concordants + discordants + numberOfTiesFirst) * (concordants + discordants + numberOfTiesSecond));
 
 		let vt = 0,
 			vu = 0,
@@ -1793,13 +1807,15 @@ Statistics.prototype.kendallsTau = function(firstColumn, secondColumn) {
 			v21 = 0,
 			v22 = 0;
 
-		for (var ties in tiesFirst) {
+		for (var tie in tiesFirst) {
+			let ties = tiesFirst[tie];
 			vt += ties * (ties - 1) * (2 * ties + 5);
 			v11 += ties * (ties - 1);
-			v12 += ties * (ties - 1) * (ties - 2);
+			v21 += ties * (ties - 1) * (ties - 2);
 		}
 
-		for (var ties in tiesSecond) {
+		for (var tie in tiesSecond) {
+			let ties = tiesSecond[tie];
 			vu += ties * (ties - 1) * (2 * ties + 5);
 			v12 += ties * (ties - 1) / (2 * length * (length - 1));
 			v22 += ties * (ties - 1) * (ties - 2) / (9 * length * (length - 1) * (length - 2));

@@ -5,7 +5,8 @@
   "description": "statistics.js allows to conduct common statistical analyses in any JavaScript environment.",
   "main": "statistics.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "debug": "node debug.js",
+    "test": "mocha ./tests/*.js"
   },
   "keywords": [
     "JavaScript",
@@ -33,19 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/thisancog/statistics.js.git"
+    "url": "git://github.com/leonardlin/statistics.js.git"
   },
   "directories": {
     "doc": "docs",
     "test": "tests"
-  },
-  "dependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thisancog/statistics.js.git"
-  },
-  "bugs": {
-    "url": "https://github.com/thisancog/statistics.js/issues"
-  },
-  "homepage": "https://github.com/thisancog/statistics.js#readme"
+  }
 }
