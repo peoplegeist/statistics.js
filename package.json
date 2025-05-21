@@ -1,6 +1,6 @@
 {
   "name": "@peoplegeist/statistics.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Matthias Planitzer (http://www.matthias-planitzer.de/)",
   "description": "statistics.js allows to conduct common statistical analyses in any JavaScript environment.",
   "main": "statistics.js",
