@@ -1,5 +1,5 @@
 {
-  "name": "statistics.js",
+  "name": "@peoplegeist/statistics.js",
   "version": "1.0.0",
   "author": "Matthias Planitzer (http://www.matthias-planitzer.de/)",
   "description": "statistics.js allows to conduct common statistical analyses in any JavaScript environment.",
@@ -34,7 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/thisancog/statistics.js.git"
+    "url": "git://github.com/peoplegeist/statistics.js.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@leonardlin/peoplegeist/statistics.js"
   },
   "directories": {
     "doc": "docs",
