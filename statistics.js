@@ -615,10 +615,10 @@ var Statistics = function(data, columns, options = {}) {
 
 		let result = { detailled: table };
 		if (keysFirst.length <= 2 && keysSecond.length <= 2) {
-			result.a = table[keysFirst[0]][keysSecond[0]] || 0;
-			result.b = table[keysFirst[0]][keysSecond[1]] || 0;
-			result.c = table[keysFirst[1]][keysSecond[0]] || 0;
-			result.d = table[keysFirst[1]][keysSecond[1]] || 0;
+			result.a = (table[keysFirst[0]] != undefined && table[keysFirst[0]][keysSecond[0]] != undefined ? table[keysFirst[0]][keysSecond[0]] : 0);
+			result.b = (table[keysFirst[0]] != undefined && table[keysFirst[0]][keysSecond[1]] != undefined ? table[keysFirst[0]][keysSecond[1]] : 0);
+			result.c = (table[keysFirst[1]] != undefined && table[keysFirst[1]][keysSecond[0]] != undefined ? table[keysFirst[1]][keysSecond[0]] : 0);
+			result.d = (table[keysFirst[1]] != undefined && table[keysFirst[1]][keysSecond[1]] != undefined ? table[keysFirst[1]][keysSecond[1]] : 0);
 		}
 
 		return result;
