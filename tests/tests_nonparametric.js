@@ -185,10 +185,21 @@ describe(".chiSquaredTest()", () => {
 				 .concat(Array(50).fill({ gender: 'female', voting: 'independent' })),
 		example2Vars = { gender: { scale: 'nominal', valueMap: ['male', 'female'] }, voting: { scale: 'nominal', valueMap: ['republican', 'democrat', 'independent'] } };
 
+		let example3Values = [
+			{x: '1', y: '1'},
+			{x: '1', y: '1'},
+			{x: '1', y: '1'},
+			{x: '1', y: '1'},
+			{x: '1', y: '1'}
+		];
+		let example3Vars = { x: { scale: 'nominal', valueMap: ['1', '0'] }, y: { scale: 'nominal', valueMap: ['1', '0'] } };
+
 	let stats1 = new Statistics(example1Values, example1Vars, options),
 		stats2 = new Statistics(example2Values, example2Vars, options),
+		stats3 = new Statistics(example3Values, example3Vars, options),
 		result1 = stats1.chiSquaredTest('neighbourhood', 'income'),
 		result2 = stats2.chiSquaredTest('gender', 'voting'),
+		result3 = stats3.chiSquaredTest('x', 'y'),
 		threshhold = stats1.epsilon;
 
 	it("should compute the correct value for several examples", () => {
@@ -198,6 +209,7 @@ describe(".chiSquaredTest()", () => {
 		assert.equal(Math.abs(result2.PearsonChiSquared - 16.2037037) < threshhold, true);
 		assert.equal(Math.abs(result2.significance - 0.0003029775) < threshhold, true);
 		assert.equal(result2.degreesOfFreedom, 2);
+		assert.equal(Math.abs(result3.PearsonChiSquared - 2.5) < threshhold, true);
 	});
 
 	it("should return undefined if only no or no existing column is given", () => {
