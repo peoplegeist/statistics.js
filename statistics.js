@@ -2480,9 +2480,11 @@ Statistics.prototype.chiSquaredTest = function(firstColumn, secondColumn) {
 	contingencyTable = contingencyTable.detailled;
 
 	let total = contingencyTable['total']['total'],
-		criticalValue = 0,
-		degreesFreedom = (Object.keys(contingencyTable).length - 1);
-	degreesFreedom = (degreesFreedom - 1) * (Object.keys(contingencyTable['total']).length - degreesFreedom - 2);
+		criticalValue = 0;
+
+	let degreesFreedom = (this.getValueMap(firstColumn).length - 1) * (this.getValueMap(secondColumn).length - 1);
+	//let degreesFreedom = (Object.keys(contingencyTable).length - 1);
+	//degreesFreedom = (degreesFreedom - 1) * (Object.keys(contingencyTable['total']).length - degreesFreedom - 2);
 
 	for (var row in contingencyTable) {
 		if (this.has(contingencyTable, row) && row !== 'total') {
